@@ -1,6 +1,7 @@
 const express = require("express");
 const middleware = require("./middleware.js");
 const path = require("path");
+const database = require("./database.js");
 
 
 const PORT = 5000;
@@ -19,6 +20,8 @@ app.use(express.static(path.join(rd, "public")));
 
 
 app.get("/", (request, response) => {
+    database.get();
+
     response.render("home");
 });
 
