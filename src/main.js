@@ -1,12 +1,25 @@
 const express = require("express");
-const app = express();
+const middleware = require("./middleware.js");
+const path = require("path");
 
 
 const PORT = 5000;
+const app = express();
+const rd = path.join(__dirname, "../")
+
+
+// Server configs
+app.set("view engine", "ejs");
+app.set("views", path.join(rd, "views"));
+
+
+// Setup middleware
+app.use(middleware);
+app.use(express.static(path.join(rd, "public")));
 
 
 app.get("/", (request, response) => {
-    response.send("Hej, Verden");
+    response.render("home");
 });
 
 
